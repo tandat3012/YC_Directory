@@ -1,4 +1,5 @@
 import { SearchForm } from '@/components/SearchForm';
+import StartupCard from '@/components/StartupCard';
 
 export default async function Home({
     searchParams,
@@ -18,6 +19,16 @@ export default async function Home({
                 </p>
 
                 <SearchForm query={query} />
+            </section>
+
+            <section className="section_container">
+                <p className="text-30-semibold">
+                    {query ? `Search results for "${query}"` : 'All Startups'}
+                </p>
+
+                <ul className="mt-7 card_grid">
+                    <StartupCard />
+                </ul>
             </section>
         </>
     );
