@@ -13,30 +13,28 @@ export const author = defineType({
         },
         {
             name: 'name',
-            title: 'Name',
             type: 'string',
             validation: (rule) => rule.required(),
         },
         {
             name: 'username',
-            title: 'Username',
             type: 'string',
             validation: (rule) => rule.required(),
         },
         {
             name: 'email',
-            title: 'Email',
             type: 'string',
             validation: (rule) => rule.required().email(),
         },
         {
             name: 'image',
-            title: 'Image',
-            type: 'url',
+            type: 'image',
+            options: {
+                hotspot: true,
+            },
         },
         {
             name: 'bio',
-            title: 'Bio',
             type: 'text',
         },
     ],
