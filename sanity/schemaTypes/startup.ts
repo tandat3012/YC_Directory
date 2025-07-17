@@ -7,7 +7,6 @@ export const startup = defineType({
     fields: [
         {
             name: 'title',
-            title: 'Title',
             type: 'string',
             validation: (rule) => rule.required(),
         },
@@ -21,39 +20,36 @@ export const startup = defineType({
             validation: (rule) => rule.required(),
         },
         {
-            name: 'description',
-            title: 'Description',
-            type: 'text',
-            validation: (rule) => rule.required(),
-        },
-        {
-            name: 'category',
-            title: 'Category',
-            type: 'string',
-            validation: (rule) => rule.required(),
-        },
-        {
-            name: 'image',
-            title: 'Image',
-            type: 'url',
-            validation: (rule) => rule.required(),
-        },
-        {
-            name: 'pitch',
-            title: 'Pitch',
-            type: 'text',
-            validation: (rule) => rule.required(),
-        },
-        {
             name: 'author',
-            title: 'Author',
             type: 'reference',
             to: [{ type: 'author' }],
             validation: (rule) => rule.required(),
         },
         {
+            name: 'description',
+            type: 'text',
+            validation: (rule) => rule.required(),
+        },
+        {
+            name: 'category',
+            type: 'string',
+            validation: (rule) =>
+                rule.min(1).max(20).required().error('Please enter a category'),
+        },
+        {
+            name: 'image',
+            type: 'image',
+            options: {
+                hotspot: true,
+            },
+            validation: (rule) => rule.required(),
+        },
+        {
+            name: 'pitch',
+            type: 'markdown',
+        },
+        {
             name: 'views',
-            title: 'Views',
             type: 'number',
             initialValue: 0,
         },
@@ -66,7 +62,10 @@ export const startup = defineType({
         },
         prepare(selection) {
             const { author } = selection;
-            return { ...selection, subtitle: author && `by ${author}` };
+            return {
+                ...selection,
+                subtitle: author && `by ${author}`,
+            };
         },
     },
 });
